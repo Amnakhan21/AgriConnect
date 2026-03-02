@@ -1,16 +1,11 @@
-# AgriConnect
-A Python-based platform connecting farmers and buyers
-### 🌾 Farmer Product Flow
-Below is the logic for how a Farmer adds a product to the AgriConnect platform:
-
-```mermaid
 graph TD
-    Start([Farmer Logs In]) --> Dash[Farmer Dashboard]
-    Dash -->|Click 'Add New Produce'| Form[Open Product Form]
-    Form --> Input[Input: Name, Qty, Price]
-    Input --> Submit{Submit?}
-    Submit -->|Yes| Auth[Flask API: Validate JWT]
-    Auth -->|Valid| DB[(MongoDB: Save Product)]
-    DB --> Notify[Success Alert]
-    Notify --> Update[Update Dashboard Table]
-    Update --> End([Product Live])
+    A[Farmer Dashboard] -->|Click Add| B[Product Form]
+    B -->|Submit Details| C[Flask API]
+    C -->|Insert Row| D[(Supabase: Postgres DB)]
+    D -->|Row Level Security| E[Secure Data Storage]
+    E -->|Update UI| F[Active Listings Table]
+    F -->|Status: Active| G[Visible to Buyers]
+
+    style A fill:#f4f4f4,stroke:#333
+    style D fill:#3ecf8e,stroke:#065f46,color:#fff
+    style F fill:#e8f5e9,stroke:#2e7d32
